@@ -119,7 +119,7 @@ class Ghost(Entity):
         """
         Erstellt Geister basierend auf spezifischen Zellenwerten in der Matrix.
 
-        :param matrix: Zweidimensionale Liste, die das Spielfeld repräsentiert.
+    :param mygame: Instanz des Spiels mit dem Matrix-Attribut.
                     5 steht für 'random' Geister
         :param images: Wörterbuch mit Geisterbildern.
         :return: Liste von Ghost-Instanzen.
@@ -134,7 +134,7 @@ class Ghost(Entity):
                     )
         return ghosts
 
-    def move(self, mygame):
+    def move(self, mygame, is_pacman = False):
         """
         Bewegt den Geist basierend auf seiner aktuellen Richtung und seinem Typ.
         Ändert die Richtung an Kreuzungen oder bei Hindernissen.
@@ -232,7 +232,7 @@ class Pacman(Entity):
         """
         Bewegt Pac-Man basierend auf Nutzereingaben und Kollisionserkennung.
 
-        :param matrix: Spielmatrix, die Wände und andere Felder darstellt.
+        :param mygame: Instanz des Spiels mit dem Matrix-Attribut die Wände und andere Felder darstellt.
         :param keys: Aktuelle Tasteneingaben (pygame.key.get_pressed()).
         """
         next_direction = self.current_direction
@@ -765,7 +765,6 @@ def load_image_safe(file_path, fallback_color=(255, 0, 0)):
 
     :param file_path: Pfad zur Bilddatei.
     :param fallback_color: Farbe des Platzhalterbildes (RGB).
-    :param size: Größe des Platzhalterbildes (Breite, Höhe).
     :return: Pygame Surface-Objekt (Bild oder Platzhalter).
     """
     try:
@@ -948,7 +947,7 @@ def load_highscores(mygame):
 def add_highscore(mygame, score):
     """Fügt einen neuen Highscore hinzu und fragt den Spielernamen ab."""
     # Erlaubte Zeichen
-    ALLOWED_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    allowedchars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
     # Namen abfragen (max. 3 Zeichen)
     name = ""
@@ -970,7 +969,7 @@ def add_highscore(mygame, score):
                         mygame.last_input_time = time.time()  # Zeit des letzten Inputs speichern
                 elif event.key == pygame.K_BACKSPACE:  # Zeichen löschen
                     name = name[:-1]
-                elif event.unicode.upper() in ALLOWED_CHARS and len(name) < 3:  # Nur erlaubte Zeichen
+                elif event.unicode.upper() in allowedchars and len(name) < 3:  # Nur erlaubte Zeichen
                     name += event.unicode.upper()
 
         # Bildschirm aktualisieren
@@ -1589,7 +1588,7 @@ def check_collision_wall(mygame, direction, speed, pos, is_pacman=False):
     """
     Überprüft, ob die Bewegung in eine Richtung durch eine Wand blockiert wird.
 
-    :param matrix: Die Spielmatrix.
+    :param mygame: Instanz des Spiels mit dem Matrix-Attribut.
     :param direction: Die Bewegungsrichtung ("up", "down", "left", "right").
     :param speed: Die Bewegungsgeschwindigkeit.
     :param pos: Die aktuelle Position des Objekts.
@@ -1787,7 +1786,7 @@ def start_game(mygame):
 
 
 def main():
-    """Pygame iniziirung und Hauptmenü"""
+    """Pygame iniziierung und Hauptmenü"""
 
     # Initialisierung
     os.environ['SDL_VIDEO_CENTERED'] = '1' # Positioniert das Fenster in der Mitte des Monitors
