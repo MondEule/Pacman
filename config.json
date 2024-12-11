@@ -1,0 +1,144 @@
+{
+    "colors": {
+        "BACKGROUNDCOLOR": [
+            9,
+            5,
+            27
+        ],
+        "WHITE": [
+            255,
+            255,
+            255
+        ],
+        "YELLOW": [
+            255,
+            204,
+            0
+        ],
+        "GRAY": [
+            100,
+            100,
+            100
+        ],
+        "DARKGRAY": [
+            90,
+            90,
+            90
+        ],
+        "RED": [
+            255,
+            0,
+            0
+        ],
+        "BLUE": [
+            51,
+            173,
+            255
+        ]
+    },
+    "fonts": {
+        "main": "assets/font/ARCADE.TTF",
+        "size_small": 40,
+        "size_medium": 50,
+        "size_large": 75
+    },
+    "levels": {
+        "0": "assets/levels/lvl0.csv",
+        "1": "assets/levels/lvl1.csv",
+        "2": "assets/levels/lvl2.csv"
+    },
+    "images": {
+        "pacman": {
+            "up": [
+                "assets/pacman-up/1.png",
+                "assets/pacman-up/2.png",
+                "assets/pacman-up/3.png"
+            ],
+            "down": [
+                "assets/pacman-down/1.png",
+                "assets/pacman-down/2.png",
+                "assets/pacman-down/3.png"
+            ],
+            "left": [
+                "assets/pacman-left/1.png",
+                "assets/pacman-left/2.png",
+                "assets/pacman-left/3.png"
+            ],
+            "right": [
+                "assets/pacman-right/1.png",
+                "assets/pacman-right/2.png",
+                "assets/pacman-right/3.png"
+            ]
+        },
+        "ghosts": {
+            "normal": [
+                "assets/ghosts/1.png",
+                "assets/ghosts/2.png",
+                "assets/ghosts/3.png",
+                "assets/ghosts/4.png"
+            ],
+            "frightened": "assets/ghosts/blue_ghost.png"
+        },
+        "items": {
+            "dot_image": "assets/other/dot.png",
+            "strawberry_image": "assets/other/strawberry.png",
+            "apple_image": "assets/other/apple.png",
+            "pill_image": "assets/other/pill.png"
+        },
+        "title_image": "assets/menu/logoYellow.png",
+        "background_image_overlay1": "assets/menu/Moving.png",
+        "background_image_overlay2": "assets/menu/MovingStars.png"
+    },
+    "sounds": {
+        "chomp_sound": "assets/sounds/eating.mp3",
+        "fruit_sound": "assets/sounds/eatingFruit.mp3",
+        "game_over_sound": "assets/sounds/gameOver.mp3",
+        "ghost_eaten_sound": "assets/sounds/ghostEaten.mp3",
+        "ghosts_scared_sound": "assets/sounds/ghostsScared.mp3",
+        "highscore_sound": "assets/sounds/highscore.mp3",
+        "theme_sound": "assets/sounds/themeSound.mp3"
+    },
+    "music": {
+        "main": "assets/sounds/pac-man_theme_remix.mp3"
+    },
+    "background": {
+        "speed": 4,
+        "speed_overlay": 1
+    },
+    "performance": {
+        "FPS": 30
+    },
+    "audio": {
+        "sound_volume": 0.5,
+        "music_volume": 0.5
+    },
+    "resolution": {
+        "default": [
+            800,
+            600,
+            20
+        ],
+        "options": [
+            [
+                800,
+                600,
+                20
+            ],
+            [
+                1280,
+                720,
+                25
+            ],
+            [
+                1280,
+                800,
+                30
+            ],
+            [
+                1920,
+                1080,
+                40
+            ]
+        ]
+    }
+}
