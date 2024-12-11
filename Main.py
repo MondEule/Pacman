@@ -209,13 +209,13 @@ class Pacman(Entity):
             Reduziert die Anzahl der Leben um eins und setzt Pac-Man zurück.
     """
 
-    def __init__(self, mygame, position, images):
+    def __init__(self, mygame, position, images, lives = 3):
         super().__init__(position, speed=mygame.convert_to_pixels(1) / 4, images=images)
 
-        self.lives = 3
+        self.lives = lives
 
     @classmethod
-    def create_pacman_from_matrix(cls, mygame, images):
+    def create_pacman_from_matrix(cls, mygame, images, lives = 3):
         """
         Erstellt ein PacMan-Objekt basierend auf der Matrix.
         Der Wert 7 in der Matrix gibt die Startposition von Pac-Man an.
@@ -223,7 +223,7 @@ class Pacman(Entity):
         pacman_position = find_coordinates_of_value(mygame, 7)
         if pacman_position:
             start_pos = pacman_position[0]  # Es gibt nur einen Pac-Man
-            return cls(mygame, position=start_pos, images=images)
+            return cls(mygame, position=start_pos, images=images, lives = lives)
         else:
             raise ValueError(
                 "Pac-Man-Position (7) wurde in der Matrix nicht gefunden! Bitte füge in der Level-Datei einen Eintrag '7' hinzu, um die Startposition festzulegen.")
@@ -733,14 +733,14 @@ class Game:
         os.environ['SDL_VIDEO_CENTERED'] = '1' # Positioniert das Fenster in der Mitte des Monitors
 
     def level_up(self):
-        # -1 da erstes lvl 0 ist
-        if int(self.level) < (len(self.config["levels"]) - 1):
+
+        if int(self.level) < (len(self.config["levels"]) - 1): # -1 da erstes lvl 0 ist
             self.level = str(int(self.level) + 1)
             try:
                 self.matrix = load_level_from_csv(self.config["levels"][self.level])
+                lives = self.pacman.lives
                 self.pacman = Pacman.create_pacman_from_matrix(
-                self, self.pacman_images)
-                self.pacman.lives += 1
+                self, self.pacman_images, lives + 1) # Damit er beim kill gleich eins verlieren kann
                 self.pacman.kill(self,"theme_sound") # stoppt kurz das Game
                 self.ghosts = Ghost.create_ghosts_from_matrix(
                 self, self.ghost_images)
@@ -1695,7 +1695,7 @@ def place_fruits(mygame, fruit_count):
     if fruit_count < 2 and random.randint(0, 200) == 0:
         x = random.randint(0, len(mygame.matrix) - 1)
         y = random.randint(0, len(mygame.matrix[0]) - 1)
-        if mygame.matrix[x][y] < 1:
+        if mygame.matrix[x][y] == 0:
             mygame.matrix[x][y] = -2  # Früchtchen
             fruit_count += 1
     return fruit_count
