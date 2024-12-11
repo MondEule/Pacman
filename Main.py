@@ -424,8 +424,8 @@ class Game:
             "GRAY": [100, 100, 100],
             "DARKGRAY": [90, 90,90],
             "RED": [255, 0, 0],
-            "BLUE": [51, 173, 255
-        ]
+            "BLUE": [51, 173, 255],
+            "DARKBLUE": [21, 68, 99]
             },
             "fonts": {
             "main": "assets/font/ARCADE.TTF",
@@ -532,14 +532,26 @@ class Game:
 
     def _init_colors(self):
         # Farben aus der Konfiguration laden
+        def validate_color(color):
+            """
+            Validiert ein Farb-Tupel. Stellt sicher, dass es genau drei Werte enthält.
+            Wenn weniger als drei Werte vorhanden sind, wird es mit Nullen ergänzt.
+            :param color: Ein Farb-Tupel oder eine Liste.
+            :return: Ein gültiges Farb-Tupel mit genau drei Werten.
+            """
+            if len(color) < 3:
+                color = tuple(color) + (0,) * (3 - len(color))
+                print(f"Farbe {color} wurde ergänzt, da sie weniger als 3 Werte hatte.")
+            return tuple(color[:3])  # Sicherstellen, dass es nicht mehr als 3 Werte gibt
         colors = self.config["colors"]
-        self.BACKGROUNDCOLOR = tuple(colors["BACKGROUNDCOLOR"])
-        self.WHITE = tuple(colors["WHITE"])
-        self.YELLOW = tuple(colors["YELLOW"])
-        self.GRAY = tuple(colors["GRAY"])
-        self.DARKGRAY = tuple(colors["DARKGRAY"])
-        self.BLUE = tuple(colors["BLUE"])
-        self.RED = tuple(colors["RED"])
+        self.DARKBLUE = validate_color(colors["DARKBLUE"])
+        self.BACKGROUNDCOLOR = validate_color(colors["BACKGROUNDCOLOR"])
+        self.WHITE = validate_color(colors["WHITE"])
+        self.YELLOW = validate_color(colors["YELLOW"])
+        self.GRAY = validate_color(colors["GRAY"])
+        self.DARKGRAY = validate_color(colors["DARKGRAY"])
+        self.BLUE = validate_color(colors["BLUE"])
+        self.RED = validate_color(colors["RED"])
 
     def _init_fonts(self):
         try:
@@ -1432,6 +1444,9 @@ def draw_game_field(mygame):
             if cell == 1:  # Wand
                 pygame.draw.rect(mygame.screen, mygame.BLUE, [
                                  draw_x, draw_y, mygame.convert_to_pixels(1), mygame.convert_to_pixels(1)])
+            if cell == 2:  # Geisterwand
+                pygame.draw.rect(mygame.screen, mygame.DARKBLUE, [
+                    draw_x, draw_y, mygame.convert_to_pixels(1), mygame.convert_to_pixels(1)])
             elif cell == 0:  # Punkt
                 mygame.screen.blit(
                     mygame.item_images["dot_image"], (draw_x, draw_y))
