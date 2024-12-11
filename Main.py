@@ -631,12 +631,22 @@ class Game:
         # Einstellungen laden und ggf. überschreiben
         self.SETTINGS_FILE = "settings.csv"
         load_settings(self)  # Bestehende Einstellungen aus der Datei laden
+        self._adjust_tile_size()
 
         # Highscore-Datei initialisieren
         self.HIGHSCORES_FILE = "highscores.csv"
         self.highscores = []
         load_highscores(self)
 
+    def _adjust_tile_size(self):
+        """
+        Passt die Tile-Größe so an, dass sie durch 5 teilbar ist. Mindestwert ist 10.
+        """
+        if self.tile_size % 5 != 0 or self.tile_size < 10:
+            original_tile_size = self.tile_size
+            self.tile_size = max(10, (self.tile_size // 5) * 5)
+            print(
+                f"Tile size {original_tile_size} angepasst: Muss min. 10 und durch 5 teilbar sein. Neue Tile-Größe: {self.tile_size}")
     def _scale_images(self):
         """
         Skaliert alle Bilder (Pacman, Geister und Items) basierend auf der Tile-Größe.
