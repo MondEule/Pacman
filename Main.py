@@ -1753,7 +1753,6 @@ def play_game(mygame):
     return current_score
 
 
-
 def start_game(mygame):
     mygame.level_up()
     score = play_game(mygame)  # Spiel starten und Score zurückgeben
