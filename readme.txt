@@ -12,14 +12,14 @@ Hinzufügen eigener Karten und Hinweise zum Spiel. Viel Spaß beim Spielen!
 
 
 
-! Settings, Highscore und die config werden erst beim ersten mal öffnen geladen !
+! Settings, Highscore und die config werden erst beim ersten mal starten geladen !
 
 -----------------------------------------------------------------------------------------------------------
 Steuerung:
 
 Pfeiltasten (↑ ↓ ← →): Bewege Pac-Man durch das Labyrinth.
 ESC: Öffnet das Hauptmenü oder beendet das Spiel.
-ENTER: Bestätige Auswahl im Menü.
+ENTER: Bestätige Auswahl im Menü und beim Namen eingeben
 UP/DOWN im Menü: Navigiere durch die Menüoptionen.
 LEFT/RIGHT (im Einstellungsmenü): Passe die Lautstärke oder Auflösung an.
 
@@ -59,11 +59,9 @@ Die Tile-Größe wird automatisch an die Auflösung angepasst.
 Auflösungswechsel:
 
 Du kannst die Auflösung im Einstellungsmenü anpassen.
-Warnung: Wenn die Auflösung zu oft hintereinander geändert wird, kann es zu Darstellungsfehlern kommen.
-In diesem Fall starte das Spiel bitte neu, um die Änderungen korrekt zu laden.
-Falls mit der config Datei eigene Auflösungen hinzugefügt werden sollen muss die größe der Kartenfelder
-manuell auch angegeben werden. Also achte auf das Format [Breite, Höhe, Feldgroesse]
-
+Falls mit der config-Datei eigene Auflösungen hinzugefügt werden sollen, muss auch die Größe der Kachelfelder
+manuell dahinter angegeben werden. Also achte auf das Format [Breite, Höhe, Feldgroesse]
+Die Feldgröße darf nicht kleiner als 10 sein und muss durch 5 teilbar sein.
 
 
 Vielen Dank, dass du dieses Spiel spielst! Genieße die spannende Jagd durch das Labyrinth, knacke den Highscore

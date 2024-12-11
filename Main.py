@@ -1284,6 +1284,8 @@ def open_menu(mygame, menu):
 
     title = menu
     running = True
+    resolution_changed = False  # Flag für geänderte Auflösung
+
     while running:
         # Hintergrund zeichnen
         draw_background(mygame)
@@ -1312,7 +1314,6 @@ def open_menu(mygame, menu):
         # Tastatureingaben
         selected_option, confirmed, left_action, right_action = handle_menu_input(
             mygame, options, selected_option)
-
         if confirmed:
             if selected_option == 0:  # QUIT
                 running = False  # Zurück ins Menü
@@ -1322,6 +1323,7 @@ def open_menu(mygame, menu):
         elif left_action and menu == "SETTINGS":
             if selected_option == 1:  # Resolution anpassen
                 mygame.adjust_resolution("left")
+                resolution_changed = True
             elif selected_option == 3:  # Decrease Music
                 adjust_music(mygame, -0.1)
             elif selected_option == 2:  # Decrease Sound
@@ -1329,6 +1331,7 @@ def open_menu(mygame, menu):
         elif right_action and menu == "SETTINGS":
             if selected_option == 1:  # Resolution anpassen
                 mygame.adjust_resolution("right")
+                resolution_changed = True
             elif selected_option == 3:  # Increase Music
                 adjust_music(mygame, 0.1)
             elif selected_option == 2:  # Increase Sound
@@ -1336,6 +1339,8 @@ def open_menu(mygame, menu):
 
         pygame.display.flip()
         mygame.clock.tick(mygame.FPS)
+
+    return resolution_changed
 
 
 def main_menu(mygame):
@@ -1368,7 +1373,8 @@ def main_menu(mygame):
             elif selected_option == 3:  # "Highscore"
                 open_menu(mygame, "HIGHSCORES")
             elif selected_option == 2:  # "Settings"
-                open_menu(mygame, "SETTINGS")
+                if open_menu(mygame, "SETTINGS"):  # Überprüfung auf Neuinitialisierung
+                    mygame = Game()  # Neuinitialisierung des Spiels
             elif selected_option == 1:  # "Credits"
                 open_menu(mygame, "CREDITS")
             elif selected_option == 0:  # "Quit"
